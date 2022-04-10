@@ -1,16 +1,8 @@
 import UsersList from 'components/organisms/UsersList/UsersList';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'assets/styles/GlobalStyles';
 import { theme } from 'assets/styles/theme';
-
-const Wrapper = styled.div`
-  background-color: ${({ theme }) => theme.colors.lightGrey};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-`;
+import { Wrapper } from './Root.styles';
 
 const Root = () => (
   <ThemeProvider theme={theme}>
