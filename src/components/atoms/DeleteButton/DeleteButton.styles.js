@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledDeleteButton = styled.button`
+export const StyledButton = styled.button`
   width: 22px;
   height: 22px;
   margin: 0 10px;
@@ -11,6 +11,7 @@ export const StyledDeleteButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+
   svg {
     width: 100%;
     height: 100%;
