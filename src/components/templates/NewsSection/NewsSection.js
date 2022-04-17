@@ -5,16 +5,7 @@ import { NewsSectionHeader, Wrapper, ArticleWrapper, TitleWrapper, ContentWrappe
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-const NewsSection = () => {
-  const [articles, setArticles] = useState([]);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    axios
-      .post(
-        'https://graphql.datocms.com/',
-        {
-          query: `{
+export const query = `{
           allArticles {
             id
             title
@@ -24,7 +15,18 @@ const NewsSection = () => {
               url
             }
           }
-        }`,
+        }`;
+
+const NewsSection = () => {
+  const [articles, setArticles] = useState([]);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    axios
+      .post(
+        'https://graphql.datocms.com/',
+        {
+          query,
         },
         {
           headers: {
