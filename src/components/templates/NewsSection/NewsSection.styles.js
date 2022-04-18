@@ -1,10 +1,10 @@
-import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper';
 import styled from 'styled-components';
+import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper';
 
 export const Wrapper = styled.div`
-  grid-row: 1/3;
-  grid-column: 3/3;
-  border-right: 1px solid ${({ theme }) => theme.colors.darkPurple};
+  grid-row: 1 / 3;
+  grid-column: 3 / 3;
+  border-left: 1px solid ${({ theme }) => theme.colors.darkPurple};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -38,7 +38,7 @@ export const TitleWrapper = styled.div`
 
   p {
     margin: 0;
-    font-size: ${({ theme }) => theme.fontSize.m};
+    font-size: ${({ theme }) => theme.fontSize.l};
   }
 `;
 

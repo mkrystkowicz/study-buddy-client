@@ -1,11 +1,10 @@
-/*eslint-disable*/
+import React, { useState, useEffect } from 'react';
+import { ArticleWrapper, ContentWrapper, NewsSectionHeader, TitleWrapper, Wrapper } from 'components/templates/NewsSection/NewsSection.styles';
 import { Button } from 'components/atoms/Button/Button';
-import React from 'react';
-import { NewsSectionHeader, Wrapper, ArticleWrapper, TitleWrapper, ContentWrapper } from './NewsSection.styles';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
 
-export const query = `{
+export const query = `
+         {
           allArticles {
             id
             title
@@ -15,7 +14,8 @@ export const query = `{
               url
             }
           }
-        }`;
+        }
+      `;
 
 const NewsSection = () => {
   const [articles, setArticles] = useState([]);
@@ -34,13 +34,17 @@ const NewsSection = () => {
           },
         }
       )
-      .then(({ data: { data } }) => setArticles(data.allArticles))
-      .catch(() => setError('Sorry something went wrong'));
+      .then(({ data: { data } }) => {
+        setArticles(data.allArticles);
+      })
+      .catch(() => {
+        setError(`Sorry, we couldn't load articles for you`);
+      });
   }, []);
 
   return (
     <Wrapper>
-      <NewsSectionHeader>News feed section</NewsSectionHeader>
+      <NewsSectionHeader>University news feed</NewsSectionHeader>
       {articles.length > 0 ? (
         articles.map(({ id, title, category, content, image = null }) => (
           <ArticleWrapper key={id}>
@@ -50,7 +54,7 @@ const NewsSection = () => {
             </TitleWrapper>
             <ContentWrapper>
               <p>{content}</p>
-              {image ? <img src={image.url} arl="article" /> : null}
+              {image ? <img src={image.url} alt="article" /> : null}
             </ContentWrapper>
             <Button isBig>Read more</Button>
           </ArticleWrapper>
