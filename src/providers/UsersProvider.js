@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { users as usersData } from 'data/users';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export const UsersContext = React.createContext({
   users: [],
@@ -8,7 +8,7 @@ export const UsersContext = React.createContext({
 });
 
 const UsersProvider = ({ children }) => {
-  const [users, setUsers] = useState(usersData);
+  const [users, setUsers] = useState([]);
 
   const deleteUser = (name) => {
     const filteredUsers = users.filter((user) => user.name !== name);
@@ -24,6 +24,13 @@ const UsersProvider = ({ children }) => {
 
     setUsers([newUser, ...users]);
   };
+
+  useEffect(() => {
+    axios
+      .get('/students')
+      .then(({ data }) => setUsers(data.students))
+      .catch((err) => console.log(err));
+  }, []);
 
   return <UsersContext.Provider value={{ users, deleteUser, handleAddUser }}>{children}</UsersContext.Provider>;
 };
