@@ -9,6 +9,7 @@
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
     "axios": "^0.26.1",
+    "downshift": "^6.1.7",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7",
     "react": "^17.0.1",
