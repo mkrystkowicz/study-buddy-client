@@ -11,7 +11,7 @@ export const BadGrades = Template.bind({});
 BadGrades.args = {
   userData: {
     name: 'Adam Romański',
-    attendance: '55%',
+    attendance: '25%',
     average: '2.0',
   },
 };
@@ -29,8 +29,8 @@ export const GoodGrades = Template.bind({});
 GoodGrades.args = {
   userData: {
     name: 'Adam Romański',
-    attendance: '55%',
-    average: '5.5',
+    attendance: '99%',
+    average: '5.0',
   },
 };
 
@@ -38,15 +38,7 @@ export const NoAverage = Template.bind({});
 NoAverage.args = {
   userData: {
     name: 'Adam Romański',
-    attendance: '55%',
+    attendance: '99%',
     average: null,
-  },
-};
-
-export const NoAttendance = Template.bind({});
-NoAttendance.args = {
-  userData: {
-    name: 'Adam Romański',
-    average: '5.0',
   },
 };

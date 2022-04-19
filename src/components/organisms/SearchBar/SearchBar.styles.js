@@ -45,8 +45,8 @@ export const SearchResults = styled.ul`
   left: 0;
   top: 30px;
   display: flex;
-  background-color: ${({ theme }) => theme.colors.white};
   flex-direction: column;
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 export const SearchResultsItem = styled.li`
