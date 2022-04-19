@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { useCallback } from 'react';
+import axios from 'axios';
 
 export const useStudents = () => {
   const getGroups = useCallback(async () => {
@@ -11,9 +11,18 @@ export const useStudents = () => {
     }
   }, []);
 
-  const getStudents = useCallback(async (groupId) => {
+  const getStudentById = useCallback(async (studentId) => {
     try {
-      const result = await axios.get(`/students/${groupId}`);
+      const result = await axios.get(`/students/${studentId}`);
+      return result.data.students;
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
+
+  const getStudentsByGroup = useCallback(async (groupId) => {
+    try {
+      const result = await axios.get(`/groups/${groupId}`);
       return result.data.students;
     } catch (e) {
       console.log(e);
@@ -32,8 +41,9 @@ export const useStudents = () => {
   };
 
   return {
-    getStudents,
     getGroups,
+    getStudentsByGroup,
     findStudents,
+    getStudentById,
   };
 };

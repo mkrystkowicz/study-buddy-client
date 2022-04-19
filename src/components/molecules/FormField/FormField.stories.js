@@ -14,5 +14,5 @@ Default.args = {
 
 export const LongLabel = Template.bind({});
 LongLabel.args = {
-  label: 'Very long label to see how it works',
+  label: 'Very long label to see how it looks',
 };
