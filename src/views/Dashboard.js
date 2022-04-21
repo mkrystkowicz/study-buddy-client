@@ -19,6 +19,7 @@ const Dashboard = () => {
   useEffect(() => {
     (async () => {
       const groups = await getGroups();
+      console.log(groups);
       setGroups(groups);
     })();
   }, [getGroups]);
@@ -29,16 +30,16 @@ const Dashboard = () => {
     handleOpenModal();
   };
 
-  if (!id && groups.length > 0) return <Redirect to={`/group/${groups[0]}`} />;
+  if (!id && groups.length > 0) return <Redirect to={`/group/${groups[0].id}`} />;
 
   return (
     <Wrapper>
       <TitleWrapper>
         <Title as="h2">Group {id}</Title>
         <nav>
-          {groups.map((group) => (
-            <Link key={group} to={`/group/${group}`}>
-              {group}{' '}
+          {groups.map(({ id }) => (
+            <Link key={id} to={`/group/${id}`}>
+              {id}{' '}
             </Link>
           ))}
         </nav>
