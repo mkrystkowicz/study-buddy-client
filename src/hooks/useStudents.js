@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import axios from 'axios';
+import { useError } from './useError';
 
 const studentsAPI = axios.create({});
 
@@ -17,12 +18,14 @@ studentsAPI.interceptors.request.use(
 );
 
 export const useStudents = () => {
+  const { dispatchError } = useError();
+
   const getGroups = useCallback(async () => {
     try {
       const result = await studentsAPI.get('/groups');
       return result.data.groups;
     } catch (e) {
-      console.log(e);
+      dispatchError('Sorry, we had a problem with getting students groups');
     }
   }, []);
 
@@ -31,7 +34,7 @@ export const useStudents = () => {
       const result = await studentsAPI.get(`/students/${studentId}`);
       return result.data.students;
     } catch (e) {
-      console.log(e);
+      dispatchError('Sorry, we had a problem with getting student');
     }
   }, []);
 
@@ -40,7 +43,7 @@ export const useStudents = () => {
       const result = await studentsAPI.get(`/groups/${groupId}`);
       return result.data.students;
     } catch (e) {
-      console.log(e);
+      dispatchError('Sorry, we had a problem with getting students');
     }
   }, []);
 
@@ -51,7 +54,7 @@ export const useStudents = () => {
       });
       return data;
     } catch (e) {
-      console.log(e);
+      dispatchError('Sorry, we had a problem with getting student');
     }
   };
 

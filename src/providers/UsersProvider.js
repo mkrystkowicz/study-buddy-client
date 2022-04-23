@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useError } from 'hooks/useError';
 
 export const UsersContext = React.createContext({
   users: [],
@@ -9,12 +10,13 @@ export const UsersContext = React.createContext({
 
 const UsersProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
+  const { dispatchError } = useError();
 
   useEffect(() => {
     axios
       .get('/students')
       .then(({ data }) => setUsers(data.students))
-      .catch((err) => console.log(err));
+      .catch(() => dispatchError('Sorry, we had a problem with getting students'));
   }, []);
 
   const deleteUser = (name) => {
