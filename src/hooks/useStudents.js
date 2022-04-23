@@ -27,25 +27,31 @@ export const useStudents = () => {
     } catch (e) {
       dispatchError('Sorry, we had a problem with getting students groups');
     }
-  }, []);
+  }, [dispatchError]);
 
-  const getStudentById = useCallback(async (studentId) => {
-    try {
-      const result = await studentsAPI.get(`/students/${studentId}`);
-      return result.data.students;
-    } catch (e) {
-      dispatchError('Sorry, we had a problem with getting student');
-    }
-  }, []);
+  const getStudentById = useCallback(
+    async (studentId) => {
+      try {
+        const result = await studentsAPI.get(`/students/${studentId}`);
+        return result.data.students;
+      } catch (e) {
+        dispatchError('Sorry, we had a problem with getting student');
+      }
+    },
+    [dispatchError]
+  );
 
-  const getStudentsByGroup = useCallback(async (groupId) => {
-    try {
-      const result = await studentsAPI.get(`/groups/${groupId}`);
-      return result.data.students;
-    } catch (e) {
-      dispatchError('Sorry, we had a problem with getting students');
-    }
-  }, []);
+  const getStudentsByGroup = useCallback(
+    async (groupId) => {
+      try {
+        const result = await studentsAPI.get(`/groups/${groupId}`);
+        return result.data.students;
+      } catch (e) {
+        dispatchError('Sorry, we had a problem with getting students');
+      }
+    },
+    [dispatchError]
+  );
 
   const findStudents = async (searchPhrase) => {
     try {
