@@ -13,7 +13,7 @@ const withEventData = (WrappedComponent, group) => {
   };
 };
 
-const DisplayEvents = (props) => {
+export const DisplayEvents = (props) => {
   return (
     <div>
       Log events
