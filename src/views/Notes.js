@@ -6,6 +6,7 @@ import { NotesWrapper } from 'components/organisms/NotesWidget/NotesWidget';
 import Note from 'components/molecules/Note/Note';
 import { useSelector, useDispatch } from 'react-redux';
 import { addNote } from 'store';
+import { useForm } from 'react-hook-form';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -16,7 +17,7 @@ export const Wrapper = styled.div`
   padding: 30px;
 `;
 
-export const FormWrapper = styled.div`
+export const FormWrapper = styled.form`
   padding: 40px;
   background: ${({ theme }) => theme.colors.white};
   border-radius: 25px;
@@ -36,16 +37,18 @@ const Notes = () => {
   const notes = useSelector((state) => state.notes);
   const dispatch = useDispatch();
 
-  const handleAddNote = () => {
-    dispatch(addNote({ title: 'New note', content: 'New content' }));
+  const { handleSubmit, register } = useForm();
+
+  const onSubmit = ({ title, content }) => {
+    dispatch(addNote({ title, content }));
   };
 
   return (
     <Wrapper>
-      <FormWrapper>
-        <StyledFormField label="Title" name="~itle" id="title" />
-        <StyledFormField isTextarea label="Content" name="content" id="content" />
-        <Button onClick={handleAddNote}>Add</Button>
+      <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+        <StyledFormField {...register('title')} label="Title" name="title" id="title" />
+        <StyledFormField {...register('content')} isTextarea label="Content" name="content" id="content" />
+        <Button type="submit">Add</Button>
       </FormWrapper>
       <NotesWrapper>
         {notes.length ? (
