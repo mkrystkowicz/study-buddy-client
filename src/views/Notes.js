@@ -4,6 +4,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { NotesWrapper } from 'components/organisms/NotesWidget/NotesWidget';
 import Note from 'components/molecules/Note/Note';
+import { useSelector, useDispatch } from 'react-redux';
+import { addNote } from 'store';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -31,17 +33,26 @@ export const StyledFormField = styled(FormField)`
 `;
 
 const Notes = () => {
+  const notes = useSelector((state) => state.notes);
+  const dispatch = useDispatch();
+
+  const handleAddNote = () => {
+    dispatch(addNote({ title: 'New note', content: 'New content' }));
+  };
+
   return (
     <Wrapper>
       <FormWrapper>
         <StyledFormField label="Title" name="~itle" id="title" />
         <StyledFormField isTextarea label="Content" name="content" id="content" />
-        <Button>Add</Button>
+        <Button onClick={handleAddNote}>Add</Button>
       </FormWrapper>
       <NotesWrapper>
-        <Note title="title" content="content" />
-        <Note title="title" content="content" />
-        <Note title="title" content="content" />
+        {notes.length ? (
+          notes.map(({ title, content, id }) => <Note key={id} id={id} title={title} content={content} />)
+        ) : (
+          <p>Create your first note</p>
+        )}
       </NotesWrapper>
     </Wrapper>
   );
