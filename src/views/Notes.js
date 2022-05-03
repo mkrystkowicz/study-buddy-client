@@ -1,12 +1,11 @@
 import { Button } from 'components/atoms/Button/Button';
 import FormField from 'components/molecules/FormField/FormField';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { NotesWrapper } from 'components/organisms/NotesWidget/NotesWidget';
 import Note from 'components/molecules/Note/Note';
-import { useSelector, useDispatch } from 'react-redux';
-import { addNote } from 'store';
 import { useForm } from 'react-hook-form';
+import { useGetNotesQuery, useAddNoteMutation } from 'store';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -34,13 +33,13 @@ export const StyledFormField = styled(FormField)`
 `;
 
 const Notes = () => {
-  const notes = useSelector((state) => state.notes);
-  const dispatch = useDispatch();
+  const { data, isLoading } = useGetNotesQuery();
+  const [addNote] = useAddNoteMutation();
 
   const { handleSubmit, register } = useForm();
 
   const onSubmit = ({ title, content }) => {
-    dispatch(addNote({ title, content }));
+    addNote({ title, content });
   };
 
   return (
@@ -50,13 +49,17 @@ const Notes = () => {
         <StyledFormField {...register('content')} isTextarea label="Content" name="content" id="content" />
         <Button type="submit">Add</Button>
       </FormWrapper>
-      <NotesWrapper>
-        {notes.length ? (
-          notes.map(({ title, content, id }) => <Note key={id} id={id} title={title} content={content} />)
-        ) : (
-          <p>Create your first note</p>
-        )}
-      </NotesWrapper>
+      {isLoading ? (
+        <h2>Loading...</h2>
+      ) : (
+        <NotesWrapper>
+          {data.notes.length ? (
+            data.notes.map(({ title, content, id }) => <Note key={id} id={id} title={title} content={content} />)
+          ) : (
+            <p>Create your first note</p>
+          )}
+        </NotesWrapper>
+      )}
     </Wrapper>
   );
 };
