@@ -3,7 +3,8 @@
     "react-app",
     "react-app/jest",
     "plugin:prettier/recommended",
-    "prettier"
+    "prettier",
+    "plugin:cypress/recommended"
   ],
   "plugins": ["prettier"],
   "rules": {
