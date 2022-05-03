@@ -30,5 +30,3 @@ export const { addNote, removeNote } = notesSlice.actions;
 export const store = configureStore({
   reducer: { notes: notesSlice.reducer },
 });
-
-// window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
