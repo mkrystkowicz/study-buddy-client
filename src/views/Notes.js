@@ -1,11 +1,11 @@
 import { Button } from 'components/atoms/Button/Button';
 import FormField from 'components/molecules/FormField/FormField';
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { NotesWrapper } from 'components/organisms/NotesWidget/NotesWidget';
 import Note from 'components/molecules/Note/Note';
 import { useForm } from 'react-hook-form';
-import { useGetNotesQuery, useAddNoteMutation } from 'store';
+import { useGetNotesQuery, useAddNoteMutation } from 'store/api/notes';
 
 export const Wrapper = styled.div`
   width: 100%;

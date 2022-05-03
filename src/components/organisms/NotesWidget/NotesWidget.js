@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Note from 'components/molecules/Note/Note';
-import { useGetNotesQuery } from 'store';
+import { useGetNotesQuery } from 'store/api/notes';
 
 const Wrapper = styled.div`
   width: 400px;

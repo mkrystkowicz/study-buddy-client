@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NoteWrapper, StyledDeleteButton } from './Note.styles';
-import { useRemoveNoteMutation } from 'store';
+import { useRemoveNoteMutation } from 'store/api/notes';
 
 const Note = ({ id, title = 'Untitled', content = 'No content' }) => {
   const [removeNote] = useRemoveNoteMutation();
